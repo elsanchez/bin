@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from datetime import datetime
+
+def pad_time(value):
+    prefix = ''
+    if value > 0 and value < 10:
+        prefix = 'oh '
+    return """%s%d""" % (prefix, value)
+
+now = datetime.time(datetime.now())
+hour = now.hour
+minute = now.minute
+second = now.second
+
+if minute == 0:
+    minute_suffix = 'hundred'
+else:
+    minute_suffix = pad_time(minute)
+
+if second == 0:
+    second_suffix = ''
+else:
+    if second == 1:
+        pl_suffix = ''
+    else:
+        pl_suffix = 's'
+    second_suffix = """ and %d second%s""" % (second, pl_suffix)
+
+message = """The time is %s %s hours%s.""" % (pad_time(hour), minute_suffix, second_suffix)
+
+print message
