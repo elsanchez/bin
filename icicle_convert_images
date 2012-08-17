@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for f in *.tif;
+do
+    filename=${f%%.tif}
+    filename=${filename%% 副本}.jpg
+    convert -chop 4x -border 4x -bordercolor white -crop +200+0 +repage -crop -200+0 +repage "${f}" "${filename}";
+done
+
