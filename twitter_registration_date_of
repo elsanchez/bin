@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# see: http://yourmacguy.wordpress.com/2009/09/12/twitter-reg-date-via-sl-services/
+#
+curl -s http://twitter.com/users/show.xml?screen_name=$1 | awk '/^  <created_at>/{sub("</created_at>","");print $2" "$3", "$6}'
