@@ -1,5 +1,6 @@
 #!/bin/sh
 #
 # see: http://yourmacguy.wordpress.com/2009/09/12/twitter-reg-date-via-sl-services/
+#      https://dev.twitter.com/docs/api/1/get/users/show
 #
-curl -s http://twitter.com/users/show.xml?screen_name=$1 | awk '/^  <created_at>/{sub("</created_at>","");print $2" "$3", "$6}'
+curl -s http://api.twitter.com/1/users/show.json?screen_name=$1 | sed -e 's/[{}]/''/g' | awk -v RS=',"' -F: '/^created_at/ {print $0}' | sed -e 's/^created_at":/''/g' -e 's/"/''/g'
